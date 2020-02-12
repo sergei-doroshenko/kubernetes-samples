@@ -1,3 +1,4 @@
+#!/bin/bash
 mvn -Dmaven.repo.local=./repository clean package &&
 tar cf repository.tar.gz ./repository &&
 docker image build -t sdoroshenko/greeting . &&
