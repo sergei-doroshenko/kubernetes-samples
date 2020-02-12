@@ -4,7 +4,7 @@ rm -rf myjre/ &&
 #cp target/spring-boot.war target/spring-boot.jar &&
 jlink \
  --output myjre \
- --module-path /Users/sergei_doroshenko/Downloads/jdk-13.0.2/lib \
+ --module-path $JAVA_HOME/lib \
  --add-modules $(jdeps --print-module-deps --ignore-missing-deps target/k8s-spring-boot-app.jar),java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument &&
 
 sudo docker image build -f Dockerfile.jre -t sdoroshenko/greeting:jre-slim . &&
