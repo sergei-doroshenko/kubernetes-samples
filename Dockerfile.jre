@@ -1,9 +1,11 @@
 FROM debian:9-slim
+#FROM alpine:3.7
 
-COPY target/spring-boot /root
+COPY target/k8s-spring-boot-app.jar /root
 COPY myjre /root/myjre
 
 EXPOSE 8080 5005
 WORKDIR /root
 
-CMD ["./myjre/bin/java", "-jar", "spring-boot.jar"]
+#CMD ["sh", "./myjre/bin/java -jar k8s-spring-boot-app.jar"]
+#CMD ["bash"]

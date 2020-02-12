@@ -1,9 +1,14 @@
-cp target/spring-boot.war target/spring-boot.jar &&
+#!/bin/bash
+# commands to create custom, slim jre and build docker image on top of it
+rm -rf myjre/ &&
+#cp target/spring-boot.war target/spring-boot.jar &&
 jlink \
-	--output myjre \
-	--add-modules $(jdeps --print-module-deps target/spring-boot.jar),\
-	java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,\
-	java.management,java.security.jgss,java.instrument &&
+ --output myjre \
+ --module-path /Users/sergei_doroshenko/Downloads/jdk-13.0.2/lib \
+ --add-modules $(jdeps --print-module-deps --ignore-missing-deps target/k8s-spring-boot-app.jar),java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument &&
 
-	sudo docker image build -f Dockerfile.jre -t sdoroshenko/greeting:jre-slim . &&
-	docker containter ls
+sudo docker image build -f Dockerfile.jre -t sdoroshenko/greeting:jre-slim . &&
+docker image ls
+#sudo docker container run -d -p 8080:8080 sdoroshenko/greeting:jre-slim
+#sudo docker container run -it -p 8080:8080 sdoroshenko/greeting:jre-slim
+#curl http://localhost:8080/
