@@ -7,5 +7,4 @@ COPY myjre /root/myjre
 EXPOSE 8080 5005
 WORKDIR /root
 
-#CMD ["sh", "./myjre/bin/java -jar k8s-spring-boot-app.jar"]
-#CMD ["bash"]
+CMD ["./myjre/bin/java", "-jar", "k8s-spring-boot-app.jar"]

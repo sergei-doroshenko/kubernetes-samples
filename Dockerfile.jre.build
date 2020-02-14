@@ -1,0 +1,12 @@
+FROM openjdk:11
+
+COPY target/k8s-spring-boot-app.jar /root
+WORKDIR /root
+
+RUN jdeps --print-module-deps k8s-spring-boot-app.jar
+
+RUN jlink \
+ --output myjre \
+ --add-modules $(jdeps --print-module-deps k8s-spring-boot-app.jar),java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument
+
+RUN du -d 1 -h /root
